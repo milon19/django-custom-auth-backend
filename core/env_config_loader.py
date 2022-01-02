@@ -12,3 +12,5 @@ class Config:
             self.DATABASES = json.loads(self.os.getenv("DATABASES"))
         self.DEBUG = self.os.getenv("DEBUG", default=False)
         self.APP_SECRET = self.os.getenv("APP_SECRET",  default=None)
+        self.JWT_SECRET = self.os.getenv("APP_SECRET",  default=None)
+        self.AUTH_HEADER_TYPE = self.os.getenv("AUTH_HEADER_TYPE",  default="Token")
