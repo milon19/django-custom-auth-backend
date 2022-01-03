@@ -4,7 +4,7 @@ from rest_framework import authentication, HTTP_HEADER_ENCODING
 from rest_framework.exceptions import AuthenticationFailed
 
 from authentication.tokens import AccessToken
-from settings import api_settings
+from authentication.settings import api_settings
 
 
 class CustomJWTAuthenticationBackend(authentication.BaseAuthentication):

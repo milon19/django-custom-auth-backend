@@ -5,7 +5,9 @@ from config.settings import config
 DEFAULTS = {
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "AUTH_HEADER_TYPE": "TOKEN",
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=7)
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=15),
+    "UPDATE_LAST_LOGIN": False,
 }
 
 

@@ -1,3 +1,35 @@
-from django.shortcuts import render
+from rest_framework import generics, status
+from rest_framework.response import Response
 
-# Create your views here.
+from authentication.expections import TokenError, InvalidToken
+from authentication.settings import api_settings
+
+from authentication.serializers import AccessTokenSerializer
+
+class TokenViewBase(generics.GenericAPIView):
+    permission_classes = ()
+    authentication_classes = ()
+
+    serializer_class = None
+
+    www_authenticate_realm = "api"
+
+    def get_authenticate_header(self, request):
+        return '{} realm="{}"'.format(
+            api_settings.AUTH_HEADER_TYPE,
+            self.www_authenticate_realm,
+        )
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except TokenError as e:
+            raise InvalidToken(e.args[0])
+
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
+
+class TokenLoginView(TokenViewBase):
+    serializer_class = AccessTokenSerializer
