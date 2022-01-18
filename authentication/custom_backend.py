@@ -37,7 +37,7 @@ class CustomJWTAuthenticationBackend(authentication.BaseAuthentication):
         if len(auth_header) == 0:
             return None, None
 
-        if auth_header[0] != api_settings.AUTH_HEADER_TYPE:
+        if auth_header[0] != api_settings.AUTH_HEADER_TYPE.encode(HTTP_HEADER_ENCODING):
             return None, None
 
         if len(auth_header) != 2:

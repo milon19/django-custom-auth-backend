@@ -50,7 +50,7 @@ class Token:
     @staticmethod
     def decode(token):
         try:
-            return jwt.decode(token, config.JWT_SECRET, algorithm='HS256')
+            return jwt.decode(token, config.JWT_SECRET, algorithms='HS256')
         except Exception:
             raise TokeDecodeError("Token is invalid or expired")
 
